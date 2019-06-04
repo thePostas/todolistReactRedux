@@ -7,6 +7,7 @@ export default class Task extends Component {
             taskIsDone: false
         }
     }
+
     render() {
         return (
             <div
