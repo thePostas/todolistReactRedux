@@ -13,7 +13,6 @@ const mapDispatchToProps = function(dispatch) {
         onChange: (event) => {
             console.log('typing');
             console.log(event.target.value);
-            // this.state.value = event.target.value;
             dispatch({
                 type: "HANDLE_INPUT",
                 payload: {

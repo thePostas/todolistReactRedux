@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 
-export default class Task extends Component {
+class Task extends Component {
     constructor(props) {
         super(props);
+        this.checkBox = React.createRef();
         this.state = {
             taskIsDone: false
         }
@@ -21,10 +23,34 @@ export default class Task extends Component {
                     +
                 </span>
                 <input
-                    // onClick={this.isDone}
+                    ref={this.checkBox}
+                    onClick={() => this.props.onClick(this.checkBox, this)}
                     type={'checkbox'}
                     className={'todolist__task-task-checkbox'}/>
             </div>
         )
     }
 }
+
+// const mapStateToProps = function(state) {
+//     return {
+//         value: state.input
+//     };
+// };
+
+const mapDispatchToProps = function(dispatch) {
+    return {
+        onClick: (ref, currentTask) => {
+            if (ref.current.checked) {
+                currentTask.setState({taskIsDone: true});
+            } else {
+                currentTask.setState({taskIsDone: false});
+            }
+        }
+    };
+};
+
+export const TaskItem = connect(
+    null,
+    mapDispatchToProps
+)(Task);

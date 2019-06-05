@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { InputContainer } from '../containers/InputContainer';
-import ProgressBar from '../components/ProgressBar';
+import { ProgressBarContainer }from '../containers/ProgressBar';
 import { CreateButton } from '../containers/TaskCreateButtonContainer';
 
 
@@ -22,7 +22,7 @@ export default class TaskGenerator extends Component{
                     <InputContainer/>
                     <CreateButton/>
                 </div>
-                <ProgressBar/>
+                <ProgressBarContainer/>
             </form>
         )
     }

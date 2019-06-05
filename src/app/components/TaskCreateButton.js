@@ -8,7 +8,7 @@ export default class TaskCreateButton extends Component{
         return (
             <button
                 className={'todolist__task-generator-button'}
-                onClick={this.props.onClick}
+                onClick={() => this.props.onClick(event, this.props.value)}
             >
                 +
             </button>

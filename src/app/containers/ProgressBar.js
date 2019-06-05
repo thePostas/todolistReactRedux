@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
 
-export default class ProgressBar extends Component{
+class ProgressBar extends Component{
     render = () => {
+        console.log('UPDATED');
         return (
             <div
                 className={'todolist__progress-bar'}>
@@ -18,3 +20,19 @@ export default class ProgressBar extends Component{
     }
 }
 
+const mapStateToProps = function(state) {
+    return {
+        tasks: state.tasks
+    };
+};
+
+const mapDispatchToProps = function(dispatch) {
+    return {
+
+    };
+};
+
+export const ProgressBarContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProgressBar);

@@ -1,4 +1,6 @@
-import Task from '../containers/Task';
+import { TaskItem } from "../containers/Task";
+
+'../containers/Task';
 import React from 'react';
 
 export function taskReducer(state = {}, action) {
@@ -7,7 +9,10 @@ export function taskReducer(state = {}, action) {
             return Object.assign(
                 {},
                 state,
-                {tasks: [...state.tasks, <Task title={state.input}/>]})
+                {
+                    tasks: [...state.tasks, <TaskItem title={state.input}/>],
+                    input: ''
+                })
         }
         case "HANDLE_INPUT": {
             return Object.assign(
