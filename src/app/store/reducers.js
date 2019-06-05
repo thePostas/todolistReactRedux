@@ -10,21 +10,32 @@ export function taskReducer(state = {}, action) {
                 {},
                 state,
                 {
-                    tasks: [...state.tasks, <TaskItem title={state.input}/>],
-                    input: ''
+                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index}/>]),
+                    input: '',
+                    index: state.index + 1
                 })
         }
         case "HANDLE_INPUT": {
             return Object.assign(
                 {},
                 state,
-                {input: action.payload.inputValue})
+                {
+                    input: action.payload.inputValue
+                })
         }
         case "DELETE_TASK": {
             return state;
         }
-        case "GET_STATE": {
-            return state;
+        case "UPDATE_TASKS": {
+            const updatedTasks = state.tasks.map((task) => {
+                return task;
+            });
+            return Object.assign(
+                {},
+                state,
+                {
+                    tasks: updatedTasks,
+                })
         }
         default: return state;
     }

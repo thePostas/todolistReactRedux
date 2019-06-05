@@ -13,6 +13,7 @@ class Task extends Component {
         return (
             <div
                 className={this.state.taskIsDone ? 'todolist__task-task todolist__task-task-done' : 'todolist__task-task'}
+                key={this.state.index}
             >
                 <p>
                     {this.props.title}
@@ -32,12 +33,6 @@ class Task extends Component {
     }
 }
 
-// const mapStateToProps = function(state) {
-//     return {
-//         value: state.input
-//     };
-// };
-
 const mapDispatchToProps = function(dispatch) {
     return {
         onClick: (ref, currentTask) => {
@@ -46,6 +41,9 @@ const mapDispatchToProps = function(dispatch) {
             } else {
                 currentTask.setState({taskIsDone: false});
             }
+            dispatch({
+                type: "UPDATE_TASKS",
+            });
         }
     };
 };
