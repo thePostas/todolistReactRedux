@@ -13,7 +13,7 @@ class ProgressBar extends Component{
 
     componentDidUpdate() {
         let doneTasks = 0;
-        this.state.tasks.map((currentTask) => {
+        this.props.tasks.map((currentTask) => {
            currentTask.props.taskIsDone ? doneTasks+=1 : doneTasks;
         });
         console.log(this.props.tasks.length, doneTasks);

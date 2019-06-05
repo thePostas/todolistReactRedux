@@ -10,7 +10,7 @@ export function taskReducer(state = {}, action) {
                 {},
                 state,
                 {
-                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index}/>]),
+                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index} taskIsDone={false}/>]),
                     input: '',
                     index: state.index + 1
                 })

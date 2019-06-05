@@ -10,6 +10,7 @@ class Task extends Component {
         }
     }
     render() {
+        console.log(this.state.taskIsDone);
         return (
             <div
                 className={this.state.taskIsDone ? 'todolist__task-task todolist__task-task-done' : 'todolist__task-task'}
@@ -36,13 +37,11 @@ class Task extends Component {
 const mapDispatchToProps = function(dispatch) {
     return {
         onClick: (ref, currentTask) => {
-            if (ref.current.checked) {
-                currentTask.setState({taskIsDone: true});
-            } else {
-                currentTask.setState({taskIsDone: false});
-            }
+            console.log(currentTask.state);
+                currentTask.setState({taskIsDone: !!ref.current.checked},() => {
+                });
             dispatch({
-                type: "UPDATE_TASKS",
+                type: "UPDATE_TASKS"
             });
         }
     };
