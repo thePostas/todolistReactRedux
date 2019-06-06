@@ -29,13 +29,13 @@ class Task extends Component {
                     {this.props.title}
                 </p>
                 <span
-                    // onClick={this.handleCloseTask}
+                    onClick={() => this.props.handleDeleteTask(this.props.taskIndex)}
                     className={'todolist__task-task-close'}>
                     +
                 </span>
                 <input
                     ref={this.checkBox}
-                    onClick={() => this.props.onClick(this.checkBox, this)}
+                    onClick={() => this.props.markAsDone(this.checkBox, this)}
                     type={'checkbox'}
                     className={'todolist__task-task-checkbox'}/>
             </div>
@@ -45,7 +45,7 @@ class Task extends Component {
 
 const mapDispatchToProps = function(dispatch) {
     return {
-        onClick: (ref, currentTask) => {
+        markAsDone: (ref, currentTask) => {
                 currentTask.setState({taskIsDone: ref.current.checked},() => {
                     dispatch({
                         type: "UPDATE_TASKS",
@@ -55,8 +55,17 @@ const mapDispatchToProps = function(dispatch) {
                         }
                     });
                 });
+        },
+        handleDeleteTask: (taskForCloseIndex) => {
+            dispatch({
+                type: "DELETE_TASK",
+                payload: {
+                    targetIndex: taskForCloseIndex
+                }
+            })
         }
     };
+
 };
 
 export const TaskItem = connect(

@@ -9,7 +9,6 @@ export default class List extends Component {
     }
 
     render = () => {
-        console.log(this.props.tasks);
         return (
             <div
                 className={'todolist__task-list'}

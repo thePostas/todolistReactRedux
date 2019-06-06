@@ -1,6 +1,5 @@
 import { TaskItem } from "../containers/Task";
 
-'../containers/Task';
 import React from 'react';
 
 export function taskReducer(state = {}, action) {
@@ -24,7 +23,17 @@ export function taskReducer(state = {}, action) {
                 })
         }
         case "DELETE_TASK": {
-            return state;
+            let updatedTasks = state.tasks.filter((task) => {
+                    console.log(action.payload.targetIndex === task.taskIndex);
+                    return action.payload.targetIndex !== task.taskIndex ? task : null
+            });
+            console.log(updatedTasks);
+            return Object.assign(
+                {},
+                state,
+                {
+                    tasks: updatedTasks,
+                })
         }
         case "UPDATE_TASKS": {
             console.log("PAYLOAD: ", action.payload.key, action.payload.isDone);
