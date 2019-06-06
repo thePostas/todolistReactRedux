@@ -6,11 +6,12 @@ class ProgressBar extends Component{
         super(props);
         this.state = {
             ...props
-        }
+        };
+        this.calculatePercent = this.props.calculatePercent.bind(this);
     }
 
     componentDidUpdate() {
-        this.props.calculatePercent(this);
+        this.calculatePercent();
     }
 
     render = () => {
@@ -38,12 +39,12 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch) {
     return {
-        calculatePercent: (bar) => {
-            bar.props.doneTasks = 0;
-            bar.props.tasks.map((currentTask) => {
-                currentTask.props.taskIsDone ? bar.props.doneTasks+=1 : bar.props.doneTasks;
+        calculatePercent: function() {
+            this.props.doneTasks = 0;
+            this.props.tasks.map((currentTask) => {
+                currentTask.props.taskIsDone ? this.props.doneTasks+=1 : this.props.doneTasks;
         });
-        const percent = bar.props.tasks.length > 0 ? Math.floor(bar.props.doneTasks / bar.props.tasks.length * 100) : 0;
+        const percent = this.props.tasks.length > 0 ? Math.floor(this.props.doneTasks / this.props.tasks.length * 100) : 0;
         dispatch({
             type: "CALCULATE_PERCENT",
             payload: {

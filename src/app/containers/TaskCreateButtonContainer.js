@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TaskCreateButton from "../components/TaskCreateButton";
 import { connect } from "react-redux";
 
@@ -10,9 +10,9 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch) {
     return {
-        onClick: (event, value) => {
+        onClick: function(event) {
             event.preventDefault();
-            if (value) {
+            if (this.props.value) {
                 dispatch({
                     type: "CREATE_TASK",
                 });
