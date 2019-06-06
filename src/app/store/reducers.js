@@ -24,10 +24,8 @@ export function taskReducer(state = {}, action) {
         }
         case "DELETE_TASK": {
             let updatedTasks = state.tasks.filter((task) => {
-                    console.log(action.payload.targetIndex === task.taskIndex);
-                    return action.payload.targetIndex !== task.taskIndex ? task : null
+                    return action.payload.targetIndex !== task.props.taskIndex ? task : null
             });
-            console.log(updatedTasks);
             return Object.assign(
                 {},
                 state,
@@ -36,12 +34,10 @@ export function taskReducer(state = {}, action) {
                 })
         }
         case "UPDATE_TASKS": {
-            console.log("PAYLOAD: ", action.payload.key, action.payload.isDone);
-            const updatedTasks = state.tasks.map((task, index) => {
-                if (action.payload.key === index) task.props.taskIsDone = action.payload.isDone;
+            const updatedTasks = state.tasks.map((task) => {
+                if (action.payload.key === task.props.taskIndex) task.props.taskIsDone = action.payload.isDone;
                 return task;
             });
-            console.log('ХРАНИЛИЩЕ: ', state.tasks);
             return Object.assign(
                 {},
                 state,

@@ -19,7 +19,6 @@ class Task extends Component {
     }
 
     render() {
-        console.log(this);
         return (
             <div
                 className={this.state.taskIsDone ? 'todolist__task-task todolist__task-task-done' : 'todolist__task-task'}

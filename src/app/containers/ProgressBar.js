@@ -11,11 +11,9 @@ class ProgressBar extends Component{
 
     componentDidUpdate() {
         this.props.calculatePercent(this);
-        console.log(this.props.tasks.length, this.props.doneTasks)
     }
 
     render = () => {
-        console.log('UPDATED');
         return (
             <div
                 className={'todolist__progress-bar'}>
@@ -42,12 +40,10 @@ const mapDispatchToProps = function(dispatch) {
     return {
         calculatePercent: (bar) => {
             bar.props.doneTasks = 0;
-            console.log('ТЕСТ ', bar.props.tasks);
             bar.props.tasks.map((currentTask) => {
                 currentTask.props.taskIsDone ? bar.props.doneTasks+=1 : bar.props.doneTasks;
         });
-        console.log(bar.props.tasks.length, bar.props.doneTasks);
-        const percent = Math.floor(bar.props.doneTasks / bar.props.tasks.length * 100);
+        const percent = bar.props.tasks.length > 0 ? Math.floor(bar.props.doneTasks / bar.props.tasks.length * 100) : 0;
         dispatch({
             type: "CALCULATE_PERCENT",
             payload: {
