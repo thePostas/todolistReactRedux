@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 export default class TaskCreateButton extends Component{
     constructor(props) {
         super(props);
+        this.value = this.props.value;
     }
     render = () => {
         return (

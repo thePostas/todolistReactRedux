@@ -10,7 +10,7 @@ export function taskReducer(state = {}, action) {
                 {},
                 state,
                 {
-                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index} taskIsDone={false}/>]),
+                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index} taskIndex={state.index} taskIsDone={false}/>]),
                     input: '',
                     index: state.index + 1
                 })
@@ -27,9 +27,12 @@ export function taskReducer(state = {}, action) {
             return state;
         }
         case "UPDATE_TASKS": {
-            const updatedTasks = state.tasks.map((task) => {
+            console.log("PAYLOAD: ", action.payload.key, action.payload.isDone);
+            const updatedTasks = state.tasks.map((task, index) => {
+                if (action.payload.key === index) task.props.taskIsDone = action.payload.isDone;
                 return task;
             });
+            console.log('ХРАНИЛИЩЕ: ', state.tasks);
             return Object.assign(
                 {},
                 state,

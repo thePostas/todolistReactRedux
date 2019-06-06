@@ -7,10 +7,19 @@ class Task extends Component {
         this.checkBox = React.createRef();
         this.state = {
             taskIsDone: false
-        }
+        };
     }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUpdate() {
+
+    }
+
     render() {
-        console.log(this.state.taskIsDone);
+        console.log(this);
         return (
             <div
                 className={this.state.taskIsDone ? 'todolist__task-task todolist__task-task-done' : 'todolist__task-task'}
@@ -37,12 +46,15 @@ class Task extends Component {
 const mapDispatchToProps = function(dispatch) {
     return {
         onClick: (ref, currentTask) => {
-            console.log(currentTask.state);
-                currentTask.setState({taskIsDone: !!ref.current.checked},() => {
+                currentTask.setState({taskIsDone: ref.current.checked},() => {
+                    dispatch({
+                        type: "UPDATE_TASKS",
+                        payload: {
+                            key: currentTask.props.taskIndex,
+                            isDone: currentTask.state.taskIsDone,
+                        }
+                    });
                 });
-            dispatch({
-                type: "UPDATE_TASKS"
-            });
         }
     };
 };
