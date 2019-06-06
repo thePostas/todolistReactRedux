@@ -8,14 +8,8 @@ class Task extends Component {
         this.state = {
             taskIsDone: false
         };
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillUpdate() {
-
+        this.markAsDone = this.props.markAsDone.bind(this);
+        this.handleDeleteTask = this.props.handleDeleteTask.bind(this);
     }
 
     render() {
@@ -28,13 +22,13 @@ class Task extends Component {
                     {this.props.title}
                 </p>
                 <span
-                    onClick={() => this.props.handleDeleteTask(this.props.taskIndex)}
+                    onClick={this.handleDeleteTask}
                     className={'todolist__task-task-close'}>
                     +
                 </span>
                 <input
                     ref={this.checkBox}
-                    onClick={() => this.props.markAsDone(this.checkBox, this)}
+                    onClick={this.markAsDone}
                     type={'checkbox'}
                     className={'todolist__task-task-checkbox'}/>
             </div>
@@ -44,22 +38,22 @@ class Task extends Component {
 
 const mapDispatchToProps = function(dispatch) {
     return {
-        markAsDone: (ref, currentTask) => {
-                currentTask.setState({taskIsDone: ref.current.checked},() => {
+        markAsDone: function() {
+                this.setState({taskIsDone: this.checkBox.current.checked},() => {
                     dispatch({
                         type: "UPDATE_TASKS",
                         payload: {
-                            key: currentTask.props.taskIndex,
-                            isDone: currentTask.state.taskIsDone,
+                            key: this.props.taskIndex,
+                            isDone: this.state.taskIsDone,
                         }
                     });
                 });
         },
-        handleDeleteTask: (taskForCloseIndex) => {
+        handleDeleteTask: function() {
             dispatch({
                 type: "DELETE_TASK",
                 payload: {
-                    targetIndex: taskForCloseIndex
+                    targetIndex: this.props.taskIndex
                 }
             })
         }
