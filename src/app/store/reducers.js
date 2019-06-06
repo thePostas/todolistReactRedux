@@ -40,6 +40,14 @@ export function taskReducer(state = {}, action) {
                     tasks: updatedTasks,
                 })
         }
+        case "CALCULATE_PERCENT": {
+            return Object.assign(
+                {},
+                state,
+                {
+                    percent: action.payload.total
+                })
+        }
         default: return state;
     }
 }

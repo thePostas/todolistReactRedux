@@ -1,24 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 class ProgressBar extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            ...props
-        };
-        this.props.percent = 0;
+    constructor() {
+        super();
     }
 
     componentDidUpdate() {
-        console.log(this.props);
-        this.props.doneTasks = 0;
-        this.props.tasks.map((currentTask) => {
-           currentTask.props.taskIsDone ? this.props.doneTasks+=1 : this.props.doneTasks;
-        });
-        console.log(this.props.tasks.length, this.props.doneTasks);
-        this.props.percent = Math.floor(this.props.doneTasks / this.props.tasks.length * 100);
-        console.log(this.props.percent);
+        this.props.calculatePercent(this)
     }
 
     render = () => {
@@ -45,6 +34,26 @@ const mapStateToProps = function(state) {
     };
 };
 
+const mapDispatchToProps = function(dispatch) {
+    return {
+        calculatePercent: (bar) => {
+            bar.props.doneTasks = 0;
+            bar.props.tasks.map((currentTask) => {
+            currentTask.props.taskIsDone ? bar.props.doneTasks+=1 : bar.props.doneTasks;
+        });
+        console.log(bar.props.tasks.length, bar.props.doneTasks);
+        const percent = Math.floor(bar.props.doneTasks / bar.props.tasks.length * 100);
+        dispatch({
+            type: "CALCULATE_PERCENT",
+            payload: {
+                total: percent
+            }
+        });
+    }
+    };
+};
+
 export const ProgressBarContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ProgressBar);
