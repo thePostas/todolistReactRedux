@@ -3,9 +3,11 @@ import inputField from '../components/InputField';
 import { connect } from "react-redux";
 
 const mapStateToProps = function(state) {
-    return {
-        value: state.input
-    };
+    if (state.input === '') {
+        return {
+            value: state.input
+        };
+    }
 };
 
 const mapDispatchToProps = function(dispatch) {
