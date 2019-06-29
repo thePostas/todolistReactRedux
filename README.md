@@ -1,3 +1,3 @@
 # todolistReactRedux
 # Установка зависимостей: npm i
-# Сборка проекта: wepback
+# Сборка проекта: webpack
