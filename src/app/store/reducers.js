@@ -1,7 +1,3 @@
-import { TaskItem } from "../containers/Task";
-
-import React from 'react';
-
 export function taskReducer(state = {}, action) {
     switch (action.type) {
         case "CREATE_TASK": {
@@ -9,7 +5,7 @@ export function taskReducer(state = {}, action) {
                 {},
                 state,
                 {
-                    tasks: state.tasks.concat([<TaskItem title={state.input} key={state.index} taskIndex={state.index} taskIsDone={false}/>]),
+                    tasks: state.tasks.concat([action.payload.task]),
                     input: '',
                     index: state.index + 1
                 })
